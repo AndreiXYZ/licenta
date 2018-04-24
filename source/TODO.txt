@@ -1,0 +1,14 @@
+NEW:
+	-Reduce number of filters in conv2d layers
+	-Maybe remove last conv2d layer
+	-Add transformations in ImageDataGenerator, see how well it performs
+
+Definitely:
+	-Add validation data
+	-Early stopping
+	-Remove TensorFlow from floyd_requirements.txt, see if performance improves (using their pre-compiled tensorflow)
+Maybe:
+	-Data augmentation (probably not necessary since class_weights are used)
+	-Use different optimizer (Nesterov) + learning schedule
+	-L1/L2, Max-norm or Batch normalization (probably not necessary since I have dropout)
+	-Experiment with different initialization strategies (currently using Glorot Uniform)
