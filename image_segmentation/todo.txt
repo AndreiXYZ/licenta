@@ -1,0 +1,2 @@
+-de testat pe mai multe boxuri 
+-accuracy pe poze (compar box-ul meu cu cel din csv)
