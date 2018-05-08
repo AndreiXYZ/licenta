@@ -3,7 +3,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix
 
 model = build_feature_extractor('best_model_acc_98_1.h5')
-background_set = extract_features('background_set', model)
+background_set = extract_features('background_set_multi', model)
 sign_set = extract_features('/home/apo/Licenta/German-Augmented/Training/00018', model)
 
 #build x and y training
