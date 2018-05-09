@@ -4,8 +4,16 @@ from sklearn.metrics import confusion_matrix
 
 model = build_feature_extractor('best_model_acc_98_1.h5')
 background_set = extract_features('background_set_multi', model)
-sign_set = extract_features('/home/apo/Licenta/German-Augmented/Training/00018', model)
 
+#build from entire dataset (train+test+validation)
+sign_set_train = extract_features('/home/apo/Licenta/German-Augmented/Training/00018', model)
+sign_set_test = extract_features('/home/apo/Licenta/German-Augmented/Testing/00018', model)
+sign_set_validation = extract_features('/home/apo/Licenta/German-Augmented/Validation/00018', model)
+
+sign_set = np.append(sign_set_train, sign_set_validation, axis=0)
+sign_set = np.append(sign_set, sign_set_test, axis=0)
+print(sign_set.shape)
+print(background_set)
 #build x and y training
 X = np.append(background_set, sign_set, axis=0)
 y = np.append(np.zeros((background_set.shape[0], 1)), np.ones((sign_set.shape[0], 1)))
