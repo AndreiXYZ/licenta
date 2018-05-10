@@ -1,15 +1,15 @@
 from helpers import *
 import random
 import sys
-rootdir = '/home/apo/Licenta/image_segmentation/FullIJCNN2013'
-background_set_path = '/home/apo/Licenta/image_segmentation/background_set_multi'
+rootdir = '/home/apo/Licenta/image_segmentation/FullIJCNN2013/for_test_set'
+background_set_path = '/home/apo/Licenta/image_segmentation/background_set_multi/test'
 
 dimensions = [24, 48, 72, 96, 120]
 
 #build 3000 image background set
 for elem in os.listdir(rootdir):
 	print(elem)
-	if len(os.listdir(background_set_path)) > 3500:
+	if len(os.listdir(background_set_path)) > 2500:
 		print('Done')
 		break
 	if elem[-3:] == 'ppm':

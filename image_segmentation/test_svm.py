@@ -1,6 +1,6 @@
 from helpers import *
 
-clf = joblib.load('SVC18.pkl')
+clf = joblib.load('SVMs/SVC18.pkl')
 
 img = plt.imread('00042.ppm')
 model = build_feature_extractor('best_model_acc_98_1.h5')

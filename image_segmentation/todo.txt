@@ -1,2 +1,3 @@
--de testat pe mai multe boxuri 
--accuracy pe poze (compar box-ul meu cu cel din csv)
+-de testat pe mai multe boxuri  -DONE
+-accuracy pe poze (compar box-ul meu cu cel din csv) -DONE
+-de antrenat SVM-urile si pe pozele celorlalte semne, nu doar pe poze de fundal
