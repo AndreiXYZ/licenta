@@ -1,7 +1,6 @@
 from helpers import *
 from sklearn.svm import SVC
-from sklearn.metrics import confusion_matrix
-
+from sklearn.metrics import confusion_matrix, f1_score
 model = build_feature_extractor('best_model_acc_98_1.h5')
 background_set = extract_features('background_set_multi/train', model)
 
@@ -28,9 +27,9 @@ clf.fit(X, y)
 y_pred = clf.predict(X)
 
 #test results using confusion matrix on training set
+print('Model score on train set:', f1_score(y,y_pred))
 confusion_mat = confusion_matrix(y, y_pred)
-print('Train acc.:', end='')
-print( (confusion_mat[0][0]+confusion_mat[1][1]) / confusion_mat.sum())
+print('Train acc.:', clf.score(X, y))
 print('Confusion matrix for trainig set:')
 print(confusion_mat)
 
@@ -48,11 +47,13 @@ sign_set_test = extract_features('/home/apo/Licenta/German-Augmented/Testing/000
 Xtest = np.append(background_set_test, sign_set_test, axis=0)
 ytest = np.append(np.zeros((background_set_test.shape[0], 1)), np.ones((sign_set_test.shape[0], 1)))
 y_pred_test = clf.predict(Xtest)
-confusion_mat_test = confusion_matrix(ytest, y_pred_test)
 
 print('Total test set size of', Xtest.shape[0], ' of which ', sign_set_test.shape[0], ' are signs.')
-print('Test acc.:', end='')
-print( (confusion_mat_test[0][0] + confusion_mat_test[1][1]) / confusion_mat_test.sum())
+
+print('F1-score on test set: ', f1_score(ytest, y_pred_test))
+confusion_mat_test = confusion_matrix(ytest, y_pred_test)
+
+print('Test acc.:', clf.score(Xtest, ytest))
 print('Confusion matrix for test set:')
 print(confusion_mat_test)
 joblib.dump(clf, 'SVC18.pkl')

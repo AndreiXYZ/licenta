@@ -1,6 +1,6 @@
--de testat pe mai multe boxuri  -DONE
+-de testat pe mai multe boxuri  ->done
 -accuracy pe poze (compar box-ul meu cu cel din csv) -DONE
--de antrenat SVM-urile si pe pozele celorlalte semne, nu doar pe poze de fundal
+-de antrenat SVM-urile si pe pozele celorlalte semne, nu doar pe poze de fundal (done) -> rezultate bune
 -de inlocuit sliding window cu selective search (probabil)
 -de facut dataset mai mare (maybe) pt antrenarea SVMurilor
 -sa fac intersectia intre regiunile clasificate
