@@ -29,8 +29,8 @@ for y,x,image in sliding_window(img, 32, (winW, winH)):
 			processed_img = process_image(img)
 			probability_dist = fullmodel.predict(processed_img)[0]
 			probability_dict = {x:y for x,y in enumerate(probability_dist)}
-			if(max(probability_dict.values()) < 0.86):
-				continue
+			# if(max(probability_dict.values()) < 0.86):
+			# 	continue
 			# plt.bar(probability_dict.keys(), probability_dict.values())
 			# plt.show()
 			# plt.imshow(image)
