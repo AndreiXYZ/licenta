@@ -2,7 +2,8 @@
 -accuracy pe poze (compar box-ul meu cu cel din csv) -DONE
 -de antrenat SVM-urile si pe pozele celorlalte semne, nu doar pe poze de fundal (done) -> rezultate bune
 
--IMPORTANT: Test SVM sign/background binarizer !!!!!
+-IMPORTANT: Test SVM sign/background binarizer !!!!! => nu a mers, tot multe false positives
+-IMPORTANT: Test SVM multi-class!!!
 
 -de inlocuit sliding window cu selective search (probabil)
 -de facut dataset mai mare (maybe) pt antrenarea SVMurilor
