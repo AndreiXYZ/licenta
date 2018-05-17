@@ -1,9 +1,9 @@
 from helpers import *
 
 #read image
-img = plt.imread('00042.ppm')
+img = plt.imread('test.ppm')
 #create a copy in order to place rectangles and text on it
-img_copy = plt.imread('00042.ppm')
+img_copy = plt.imread('test.ppm')
 
 #load our feature extractor and full model (used for possible thresholding)
 model = build_feature_extractor('best_model_acc_98_1.h5')
@@ -21,7 +21,7 @@ for i in range(43):
 font = cv2.FONT_HERSHEY_DUPLEX
 
 #run sliding window and all SVMs on the image
-(winW, winH) = (110, 110)
+(winW, winH) = (512, 512)
 for y,x,image in sliding_window(img, 32, (winW, winH)):
 	features = pass_pipeline(image, model)
 	for i,svm in enumerate(SVMs):
@@ -37,6 +37,8 @@ for y,x,image in sliding_window(img, 32, (winW, winH)):
 			# plt.show()
 			cv2.rectangle(img_copy, (x,y), (x+winH, y+winW), (0,255,0), 3)
 			cv2.putText(img_copy, sign_dict[i], (x, y+150), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+			plt.imshow(img_copy)
+			plt.show()
 
 plt.imshow(img_copy)
 plt.show()

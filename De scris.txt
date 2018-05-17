@@ -10,6 +10,7 @@ Dataset:
 	-procesarea imaginii (alb-negru + resize 32x32)
 	-balancing
 	-adaugare de variatie
+	-cum am construit datasetul de semne
 
 CNN:
 	-cloudul folosit (hardware-ul)

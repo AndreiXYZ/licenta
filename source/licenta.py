@@ -144,15 +144,15 @@ if __name__ == "__main__":
 						validation_steps=1300//batch_size,
 						epochs=300,
 						class_weight=class_weights,
-						use_multiprocessing=True,
+						#use_multiprocessing=True,
 						callbacks=callbacks
 						#workers=12
 						)
 
 	score = model.evaluate_generator(
 						test_generator,
-						steps=12500//batch_size,
-						use_multiprocessing=True
+						steps=12500//batch_size
+						#use_multiprocessing=True
 						#workers=12
 						)
 	
@@ -164,12 +164,14 @@ if __name__ == "__main__":
 	best_model_loss_score = bestModelLoss.evaluate_generator(
 						test_generator,
 						steps=12500//batch_size,
-						use_multiprocessing=True)
+						#use_multiprocessing=True
+						)
 
 	best_model_acc_score = bestModelAcc.evaluate_generator(
 						test_generator,
 						steps=12500//batch_size,
-						use_multiprocessing=True)
+						#use_multiprocessing=True
+						)
 
 	print("Score of best model (by loss)={}".format(best_model_loss_score))
 	print("Score of best model (by acc)={}".format(best_model_acc_score))
