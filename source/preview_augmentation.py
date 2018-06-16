@@ -9,9 +9,9 @@ datagen = ImageDataGenerator(
         zoom_range=0.2,
         fill_mode='nearest')
 
-img = load_img('/home/apo/Licenta/source/00000_00014.ppm')  # this is a PIL image
-x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
-x = x.reshape((1,) + x.shape)  # this is a Numpy array with shape (1, 3, 150, 150)
+img = load_img('/home/apo/Licenta/source/00004_00024.ppm')
+x = img_to_array(img)
+x = x.reshape((1,) + x.shape)
 
 # the .flow() command below generates batches of randomly transformed images
 # and saves the results to the `preview/` directory

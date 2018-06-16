@@ -6,6 +6,7 @@
 -IMPORTANT: Test SVM sign/background binarizer !!! => nu a mers, tot multe false positives
 -IMPORTANT: Test SVM multi-class!!!
 
+-IMPORTANT: antrenare pe HOG features (haar cascade/hog/sift/surf)
 
 -IMPORTANT: Sa incerc cu Faster R-CNN
 

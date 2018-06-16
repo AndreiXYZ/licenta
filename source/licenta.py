@@ -14,7 +14,7 @@ import os, pwd, pickle, glob
 from skimage import transform
 
 def get_username():
-    return pwd.getpwuid( os.getuid() )[ 0 ]
+    return pwd.getpwuid( os.getuid() )[0]
 
 def process_image(img_path):
 	img = plt.imread(img_path)
@@ -27,20 +27,17 @@ def createModel():
 	model.add(Conv2D(32, (3, 3), strides=(1,1), input_shape=(32, 32, 3)))
 	model.add(Activation('elu'))
 	model.add(MaxPooling2D(pool_size=(2, 2), data_format='channels_last'))
-
 	model.add(Conv2D(64, (3, 3), strides=(1,1)))
 	model.add(Activation('elu'))
 	model.add(MaxPooling2D(pool_size=(2, 2), data_format='channels_last'))
-
 	model.add(Conv2D(128, (3, 3), strides=(1,1)))
 	model.add(Activation('elu'))
+	model.add(MaxPooling2D(pool_size=(2, 2), data_format='channels_last'))
 	
 	model.add(Flatten())
-
 	model.add(Dense(1024, kernel_regularizer=l2(0.0001)))
 	model.add(Activation('elu'))
 	model.add(Dropout(0.3))
-
 	model.add(Dense(43))
 	model.add(Activation('softmax'))
 	
@@ -94,8 +91,8 @@ if __name__ == "__main__":
 						class_mode='categorical'
 						)
 
-
 	val_datagen = ImageDataGenerator(rescale=1./255)
+
 	validation_generator = val_datagen.flow_from_directory(
 									valPath,
 									target_size=(32,32),
@@ -142,41 +139,40 @@ if __name__ == "__main__":
 						shuffle=True,
 						steps_per_epoch=25000//batch_size,
 						validation_steps=1300//batch_size,
-						epochs=300,
+						epochs=250,
 						class_weight=class_weights,
-						#use_multiprocessing=True,
+						use_multiprocessing=True,
 						callbacks=callbacks
 						#workers=12
 						)
 
 	score = model.evaluate_generator(
 						test_generator,
-						steps=12500//batch_size
-						#use_multiprocessing=True
+						steps=12500//batch_size,
+						use_multiprocessing=True
 						#workers=12
 						)
 	
 	print("Score on last model={}".format(score))
-
 	bestModelLoss = load_model('/output/best_model_loss.h5')
 	bestModelAcc = load_model('/output/best_model_acc.h5')
 
 	best_model_loss_score = bestModelLoss.evaluate_generator(
 						test_generator,
 						steps=12500//batch_size,
-						#use_multiprocessing=True
-						)
+						use_multiprocessing=True)
 
 	best_model_acc_score = bestModelAcc.evaluate_generator(
 						test_generator,
 						steps=12500//batch_size,
-						#use_multiprocessing=True
-						)
+						use_multiprocessing=True)
 
 	print("Score of best model (by loss)={}".format(best_model_loss_score))
 	print("Score of best model (by acc)={}".format(best_model_acc_score))
+
 	#Save history obj for visualisation
 	print("History={}".format(history.history))
+
 	#Save model architecture
 	bestModelLoss.save("/output/best_model_loss.h5")
 	bestModelAcc.save("/output/best_model_acc.h5")
