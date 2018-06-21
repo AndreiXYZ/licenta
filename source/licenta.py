@@ -42,7 +42,7 @@ def createModel():
 	model.add(Activation('softmax'))
 	
 	model.compile(loss='categorical_crossentropy',
-				  optimizer=Adam(lr=0.003),
+				  optimizer='adam',
 				  metrics=['accuracy'])
 	return model
 
@@ -139,7 +139,7 @@ if __name__ == "__main__":
 						shuffle=True,
 						steps_per_epoch=25000//batch_size,
 						validation_steps=1300//batch_size,
-						epochs=250,
+						epochs=60,
 						class_weight=class_weights,
 						use_multiprocessing=True,
 						callbacks=callbacks
