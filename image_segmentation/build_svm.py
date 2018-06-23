@@ -15,7 +15,7 @@ y = np.append(np.zeros((backgrounds['train'].shape[0], 1)), np.ones((signs['trai
 
 print('Total set size of', X.shape[0], ' of which ', signs['train'].shape[0], ' are signs.')
 
-clf = SVC(kernel='rbf', class_weight='balanced', verbose=True)
+clf = SVC(kernel='linear', class_weight='balanced', verbose=True, C=0.8)
 clf.fit(X, y)
 y_pred = clf.predict(X)
 
@@ -27,9 +27,23 @@ print('Confusion matrix for trainig set:')
 print(confusion_mat)
 
 
-#now run confusion matrix on test set
+#now run confusion matrix on validation set
 #we proceed in a similar fashion to the training set
 
+print('-'*30)
+Xval = np.append(backgrounds['val'], signs['val'], axis=0)
+yval = np.append(np.zeros((backgrounds['val'].shape[0],1)), np.ones((signs['val'].shape[0], 1)))
+y_pred_val = clf.predict(Xval)
+print('Total val set size of ', Xval.shape[0], ' of which ', signs['val'].shape[0], ' are signs.')
+print('F1-score on test set: ', f1_score(yval, y_pred_val))
+confusion_mat_val = confusion_matrix(yval, y_pred_val)
+
+print('Test acc.:', clf.score(Xval, yval))
+print('Confusion matrix for val set:')
+print(confusion_mat_val)
+
+#now the test set
+print('-'*30)
 Xtest = np.append(backgrounds['test'], signs['test'], axis=0)
 ytest = np.append(np.zeros((backgrounds['test'].shape[0], 1)), np.ones((signs['test'].shape[0], 1)))
 y_pred_test = clf.predict(Xtest)
@@ -42,4 +56,4 @@ confusion_mat_test = confusion_matrix(ytest, y_pred_test)
 print('Test acc.:', clf.score(Xtest, ytest))
 print('Confusion matrix for test set:')
 print(confusion_mat_test)
-# joblib.dump(clf, 'SVC18.pkl')
+joblib.dump(clf, 'SVC8e-1.pkl')
