@@ -1,9 +1,0 @@
-\chapter*{Abstract}
-
-The problem of detecting and classifying objects has seen a boost in accuracy as well as performance speed in recent years, due to the development of deep learning techniques such as YOLO, Single-Shot-Detectors and Faster R-CNN. These methods, however, are notorious for their ravenous appetite for data and compute power; they also require datasets with labeled bounding boxes, as well as the class represented in the box, which are still scarce and are difficult to build manually.\\
-
-In this paper, we explore a way of building a system that performs detection without having access to a dataset equipped with labeled bounding boxes, and using a relatively smaller amount of computing power. This method involves building a convolutional neural network to discern between object classes, and a binary classifier to discriminate between background and objects of interest.\\
-
-In the $2nd$ and $3rd$ chapters, we describe how we have built these systems, justifying and explaining how the hyperparameters have been chosen along the way. We have used well established techniques, as well as new experimental insights that have been generated in the training process. The $1st$ chapter is reserved for how we have brought the traffic sign dataset into a form from which the neural network might learn best, as well as how we generated a background dataset, which is required for the detection phase.\\
-
-While we have framed this task as a general object detection problem, we have chosen a particular dataset consisiting of road signs due to its relevance in the automotive industry, with driver assistance or autopilot technologies emerging into the consumer market.
