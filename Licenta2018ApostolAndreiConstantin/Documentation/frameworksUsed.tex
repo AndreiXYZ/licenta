@@ -1,0 +1,25 @@
+\begin{appendix}
+\begin{center}
+	\chapter{Appendix: Frameworks \& Tools Used}
+\end{center}
+All of the source code has been written in Python v3.6 and has multiple dependencies. Some libraries used include NumPy (for linear algebra computation and storing the datasets as tensors), Matplotlib (used to generate plots and figures) as well as various standard Python modules: os (general operating system functionality), pickle (serialization and de-serialization), glob (Unix-style pathname pattern expansion), etc.
+
+In this chapter, we will present the frameworks as well as the cloud service used for training and tweaking the machine learning models involved, which is the bulk of the application.
+
+\section{OpenCV}
+OpenCV (Open Computer Vision)\cite{OpenCV} is a library used mainly for computer vision and image manipulation tasks. It is written in optimized C/C++ and also has interfaces for Python and Java. In the context of this project, it has been used for applying transformations and resizing/reshaping to the image dataset in order to bring it to a state which a neural network might learn best from. The entire dataset preparation process is detailed in the $1st$ chapter.
+\section{Tensorflow and Keras}
+According to the official documentation\cite{TFDocs}, TensorFlow is an open-source software library for high performance numerical computing.
+The way that it operates is by graph computation, which means that at runtime, a computational graph is defined via the Python API. When we run the Python interpreter, the graph is then passed to a C parser which handles all of the computation. This is done to ensure a high degree of efficiency as well as a low memory footprint. While TensorFlow can be used for any type of numerical computation, its main use in this project is the development of the convolutional neural network. More precisely, we have used it as a back-end for a deep learning framework, Keras.
+
+Keras\cite{KerasDocs} is a high-level neural networks API, capable of running on top of TensorFlow, CNTK or Theano. Its use inside this project is as a wrapper for TensorFlow, allowing us to easily prototype different model architectures as well as hyperparameters. Another advantage of Keras is that it runs seamlessly on CPU/GPU clusters, reaching almost the native speeds of its back-end library.
+
+\section{Sci-kit Learn}
+Sci-kit Learn (or SKLearn)\cite{SKLearn} is a Python library which includes various machine learning algorithms as well as evaluators and functions used to manipulate data. We have used its SVC package (for defining and running support-vector machine models), outlier detection modules (OneClassSVM, IsolaionForest etc.). For debugging, various evalutaion metrics have been used such as confusion matrix, F1-score and accuracy.\\
+Training, testing and validation sets are passed to SKLearn as NumPy tensors and all of the numerical computation is also done using highly efficient linear algebra operations defined in NumPy.
+Its utility is showcased in the Detection chapter.
+
+\section{FloydHub}
+FloydHub\cite{FloydHub} is a cloud ecosystem which allows us to run our application using high performance hardware. Specifically, we have used an Intel Xeon\textsuperscript{\tiny\textregistered} dual-core processor and an Nvidia\textsuperscript{\tiny\textcopyright}  Tesla K80 GPU with 12 GB VRAM, 61 GB RAM and 100 GB SSD. When running inside the cloud application, we have used a version of TensorFlow compiled specifically for the instruction set used by the CPU and GPU. This has gained us a lower training and test time which allowed for faster experimentation and development. \\
+It has a command-line interface from which an user can upload/update a dataset and run his application, which then gets assigned a job number and is queued for execution. FloydHub also offers a browser interface where a user can visualise training metrics (accuracy and loss function value, in our case) as well as system metrics (CPU/GPU/memory/disk usage).
+\end{appendix}

@@ -1,0 +1,269 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{cnnOriginal}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {al.}{a.}%
+     {LeCun}{L.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Stanford Vision Lab}%
+  }
+  \strng{namehash}{aLe1}
+  \strng{fullhash}{aLe1}
+  \field{sortinit}{A}
+  \field{howpublished}{\url{http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf}}
+  \field{title}{Gradient-Based Learning Applied to Document Recognition}
+\endentry
+
+\entry{overfeat}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {al.}{a.}%
+     {Pierre~Sermanet}{P.~S.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \strng{namehash}{aPSe1}
+  \strng{fullhash}{aPSe1}
+  \field{sortinit}{A}
+  \field{howpublished}{\url{https://arxiv.org/abs/1312.6229}}
+  \field{title}{OverFeat: Integrated Recognition, Localization and Detection
+  using Convolutional Networks}
+\endentry
+
+\entry{cnnFeatureExtraction}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {al.}{a.}%
+     {Razvaian}{R.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \strng{namehash}{aRe1}
+  \strng{fullhash}{aRe1}
+  \field{sortinit}{A}
+  \field{howpublished}{\url{https://arxiv.org/pdf/1403.6382.pdf}}
+  \field{title}{CNN features off-the-shelf: an Astounding Baseline for
+  Recognition}
+\endentry
+
+\entry{rcnn}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {al.}{a.}%
+     {Ross~Girshick}{R.~G.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \strng{namehash}{aRGe1}
+  \strng{fullhash}{aRGe1}
+  \field{sortinit}{A}
+  \field{howpublished}{\url{https://arxiv.org/abs/1311.2524}}
+  \field{title}{Rich feature hierarchies for accurate object detection and
+  semantic segmentation}
+\endentry
+
+\entry{resNet}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {al.}{a.}%
+     {Xiangyu~Zhang}{X.~Z.}%
+     {et}{e.}%
+     {}{}}%
+  }
+  \strng{namehash}{aXZe1}
+  \strng{fullhash}{aXZe1}
+  \field{sortinit}{A}
+  \field{howpublished}{\url{https://arxiv.org/abs/1512.03385}}
+  \field{title}{Deep Residual Learning for Image Recognition}
+\endentry
+
+\entry{FloydHub}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Inc.}{I.}%
+     {FloydHub}{F.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{IF1}
+  \strng{fullhash}{IF1}
+  \field{sortinit}{I}
+  \verb{url}
+  \verb https://www.floydhub.com/
+  \endverb
+\endentry
+
+\entry{TFDocs}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Inc.}{I.}%
+     {Google}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{IG1}
+  \strng{fullhash}{IG1}
+  \field{sortinit}{I}
+  \field{title}{TensorFlow Docs}
+  \verb{url}
+  \verb https://tensorflow.org/
+  \endverb
+\endentry
+
+\entry{nesterov}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Nesterov}{N.}%
+     {Yurii}{Y.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Soviet Mathematics Doklady}%
+  }
+  \strng{namehash}{NY1}
+  \strng{fullhash}{NY1}
+  \field{sortinit}{N}
+  \field{howpublished}{\url{https://goo.gl/V011vD}}
+  \field{title}{A method for unconstrained convex minimization problem with the
+  rate of convergence O(1/k2)}
+\endentry
+
+\entry{GTSDB}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Neuroinformatik}{N.}%
+     {Instit\"{u}t}{I.}%
+     {fur}{f.}%
+     {}{}}%
+  }
+  \strng{namehash}{NIf1}
+  \strng{fullhash}{NIf1}
+  \field{sortinit}{N}
+  \field{title}{German Traffic Sign Detection Benchmark}
+  \verb{url}
+  \verb http://benchmark.ini.rub.de/?section=gtsdb&subsection=dataset
+  \endverb
+\endentry
+
+\entry{GTSRB}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Neuroinformatik}{N.}%
+     {Instit\"{u}t}{I.}%
+     {fur}{f.}%
+     {}{}}%
+  }
+  \strng{namehash}{NIf1}
+  \strng{fullhash}{NIf1}
+  \field{sortinit}{N}
+  \field{title}{German Traffic Sign Recognition Benchmark}
+  \verb{url}
+  \verb http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset
+  \endverb
+\endentry
+
+\entry{KerasDocs}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {ONEIROS}{O.}%
+     {Project}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{OP1}
+  \strng{fullhash}{OP1}
+  \field{sortinit}{O}
+  \field{title}{Keras Docs}
+  \verb{url}
+  \verb https://keras.io/
+  \endverb
+\endentry
+
+\entry{SKLearn}{online}{}
+  \field{sortinit}{S}
+  \field{title}{SKLearn Docs}
+  \verb{url}
+  \verb https://keras.io/
+  \endverb
+\endentry
+
+\entry{OpenCV}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Team}{T.}%
+     {OpenCV}{O.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{TO1}
+  \strng{fullhash}{TO1}
+  \field{sortinit}{T}
+  \field{title}{OpenCV Official Documentation}
+  \verb{url}
+  \verb https://opencv.org/
+  \endverb
+\endentry
+
+\entry{glorotPaper}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Xavier~Glorot}{X.~G.}%
+     {Yoshua~Bengio}{Y.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {University of Montreal, Canada}%
+  }
+  \strng{namehash}{XGYB1}
+  \strng{fullhash}{XGYB1}
+  \field{sortinit}{X}
+  \field{howpublished}{\url{http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf}}
+  \field{title}{Understanding the difficulty of training deep feed-forward
+  neural networks}
+\endentry
+
+\entry{lecunDetection}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Yann~LeCun}{Y.~L.}%
+     {Pierre~Sermanet}{P.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Courant Institute of Mathematical Sciences}%
+  }
+  \strng{namehash}{YLPS1}
+  \strng{fullhash}{YLPS1}
+  \field{sortinit}{Y}
+  \field{howpublished}{\url{http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf}}
+  \field{title}{Traffic Sign Recognition with Multi-Scale Convolutional
+  Networks}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

@@ -1,0 +1,80 @@
+\begin{center}
+\chapter{Integrating into a Detection System}
+\end{center}
+
+Since we now have a high performing neural network model saved and ready for inference, we have researched several methods in which we might integrate this into a system that also performs detection of the traffic signs. In this chapter, we define a possible pipeline that can be used for this task as well as the methods for detection.\\
+
+\section{Neural Network as a Feature Extractor}
+In all of the methods outlined in the following sections, we have used the convolutional neural network as a feature extractor. What this means is that we retrieved the trained model (saved as a file to disk), and removed the layers that performed classification (e.g. the two fully-connected layers). By passing an image into this newer model, we obtain a vector (tensor) that represents the convolutional features extracted so far by the network. It has been shown in a paper by Razvaian et al.\cite{cnnFeatureExtraction} that convolutional features work better than Haar, HOG or SIFT style features as they are able to capture more patterns and are also invariant to small shifts in the image. Therefore, they are perfect for training a binary classifier on.\\
+As such, the pipeline that we want to build involves running a sliding window or image segmentation technique on the image, and for each patch of potential object, pass it through the convolutional and pooling layers to extract the features, use those features to classify it as either sign or background, and if it is a sign, pass it through the fully-connected layers of the network to perform classification. Finally, we add a labeled bounding box to the image.
+
+\section{Outlier Detection Techniques}
+Initially we have experimented with outlier detection techniques. Such a model doesn't require labeled data and attempts to classify novel data as different or similar to the data it was trained on. Some of the outlier detection models we have tried are Isolation Forest, Local Outlier Factor and One-class Support Vector Machine. They have been trained on the traffic sign data and tested on the background pictures. While they have performed well on the training set, the results have been very poor on the testing set and as such we have chosen not to explore this option any further.
+
+\section{Support Vector Machines}
+A support vector machine is a very powerful and versatile machine learning model, able to perform binary classification. It works by drawing a linear decision boundary (if using the linear kernel) as to fit the widest possible street to separate the negative and the positive samples. This is called large margin classification. Note that when training an SVM, adding instances "off the street" does not affect the decision boundary at all: it is fully determined by the instances located on the edge of the street. These instances are called the \textit{support vectors}.\\
+The linear SVM classifier model predicts the class of a new instance $x$ by simply computing the decision function $w^T \cdot x + b$. If the result is positive, the predicted class $\hat{y}$ is the positive class, otherwise it is the negative class. 
+\begin{center}
+$
+\hat{y} = 
+    \begin{cases}
+        0, if & w^T \cdot x + b < 0,\\
+        1, if & w^T \cdot x + b \geq 0 \\
+\end{cases}
+$\\
+where $w$ is the feature weights vector (coordonates of a vector orthogonal to the hyperplane, which is the decision boundary), and $b$ the bias term
+\end{center}
+To get a margin as wide as possible, we want to minimize the slope of the decision function, which is equal to the norm of the weights vector $\norm{w}$. The smaller the slope, the wider the margin, since reducing the slope will cause the distance from the points where the decision function is $\pm{1}$ to increase. We also want to avoid any margin violation, so we define $t^{(i)}=-1$ for negative examples, and $t^{(i)}=1$ for positive samples to express this constraint as $t^{(i)}(w^T \cdot x^{(i)} + b) \geq 1$ for all instances. We can now express the objective function as follows:
+\begin{equation}
+\begin{aligned}
+& \underset{w,b}{\text{min}}
+& & \frac{1}{2} w^T \cdot w \\
+& \text{subject to}
+& & t^{(i)} (w^T \cdot x^{(i)} + b) \geq 1 & \text{for} \quad i=\overline{1,m}
+\end{aligned}
+\end{equation}
+If we impose that no instances may violate the margin, however, our model will only function if the data is linearly separable, and be extremely sensitive to outliers. As such, we have used a method called \textit{soft margin classification}, which is a more flexible model. To get the soft margin objective, a slack variable $\xi^{(i)} \geq 0$ has to be introduced for each instance, measuring how much the $i^{th}$ instance is allowed to violate the margin. Reducing the margin violations and making the margin as wide as possible are actually conflicting objectives, so we require a hyperparameter $C \in [0,1]$ which defines a trade-off between the two objectives. This gives us the constrained optimization problem for the soft margin classification:
+ \begin{equation}
+\begin{aligned}
+& \underset{w,b,\xi}{\text{min}}
+& & \frac{1}{2} w^T \cdot w + C \sum_{i=1}^{m} \xi^{(i)}\\
+& \text{subject to}
+& & t^{(i)} (w^T \cdot x^{(i)} + b) \geq 1-\xi^{(i)} & \text{and} \quad \xi^{(i)} \geq 0 \quad \text{for} \quad i=\overline{1,m}
+\end{aligned}
+\end{equation}
+A SVM doesn't necessarily fit a linear function, and can build more complicated decision boundaries by using the \textit{kernel trick} which adds slight modifications to its internal representation so as to switch to a different space. However, we have obtained good metrics when running it with the linear kernel, so this option was skipped.\\
+When applying a support vector machine with linear kernel to convolutional features extracted from the data (both sign and background images) we have obtained the following results:
+
+\begin{center}
+ \begin{tabular}{||c | c | c | c||} 
+ \hline
+ Train Acc. & Train F-Score & Test Acc. & Test F-Score \\ [0.5ex] 
+ \hline
+ 99,936\% & 99,934\% & 99,088\%  & 99,096\% \\ 
+ \hline
+\end{tabular}
+\end{center}
+\begin{center}
+Confusion matrix for training and testing, respectively:
+\[
+\begin{bmatrix}
+26803 & 7 \\
+26 & 25324
+\end{bmatrix}
+\]
+\quad
+\[
+\begin{bmatrix}
+12214 & 109 \\
+118 & 12451 \\
+\end{bmatrix}
+\]
+where $F1\-score = 2*\frac{p+r}{p*r} \quad p=\frac{tp}{tp+fp} \quad r=\frac{tp}{tp+fn}$
+\end{center}
+Note that in order to get the best possible C parameter, we have used grid search over a list of values ranging from $1e-5$ to $1$, with a total of 12 runs over the validation set. The C value that offered the best results is $0.8$.
+
+\section{The Pipeline}
+Now we can combine these two models and use them in a pipeline. First, we slide a window over the image and for each patch we pass it through the first layers of our neural network to perform feature extraction. We classify these features using the trained support vector machine. If it yields 1 then it is a sign, and we pass it to the final fully-connected layers of the network. Moreover, we perform thresholding over the neural network's probabilities to eliminate false positives as much as possible. A threshold of $80\%$ seemed to work best in practice. Also, when dealing with multiple bounding boxes in the same region that belong to the same sign, we simply merge them to form a larger rectangle. Here is an example of a labeled picture that our pipeline outputs:
+\begin{center}
+\includegraphics{example-1}
+\end{center}

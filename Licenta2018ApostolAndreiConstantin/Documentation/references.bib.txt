@@ -1,0 +1,6 @@
+@BOOK{texbook,
+	author = "Google",
+	title= "TensorFlow Docs",
+	publisher = "\url{google.com}",
+	year = 1984
+	}
