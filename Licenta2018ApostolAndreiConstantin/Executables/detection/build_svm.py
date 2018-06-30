@@ -19,7 +19,7 @@ clf = SVC(kernel='linear', class_weight='balanced', verbose=True, C=0.8)
 clf.fit(X, y)
 y_pred = clf.predict(X)
 
-# #test results using confusion matrix on training set
+#test results using confusion matrix on training set
 print('Model score on train set:', f1_score(y,y_pred))
 confusion_mat = confusion_matrix(y, y_pred)
 print('Train acc.:', clf.score(X, y))
